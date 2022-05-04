@@ -1,4 +1,4 @@
-package playground.gleich.misc;
+package playground.gleich.plans;
 
 import java.util.HashSet;
 import java.util.Set;
