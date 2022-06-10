@@ -41,11 +41,11 @@ public class MoveCarAgentsToCar2StreamReading {
 
 	public static void main(String[] args) {
 		String carMode = TransportMode.car;
-		String car2Mode = "walk";
-//		String car2Mode = "car2";
+//		String car2Mode = "walk";
+		String car2Mode = "car2";
 		double probability = 1.0;
 		String inputPopulationPath = "/home/gregor/git/public-svn/matsim/scenarios/countries/de/berlin/berlin-v5.5-10pct/input/berlin-v5.5-10pct.plans.xml.gz";
-		String outputPopulationPath = "/home/gregor/git/public-svn/matsim/scenarios/countries/de/berlin/berlin-v5.5-10pct/input/berlin-v5.5-10pct.plans_all_" + car2Mode + ".xml.gz";
+		String outputPopulationPath = "/home/gregor/git/public-svn/matsim/scenarios/countries/de/berlin/berlin-v5.5-10pct/input/berlin-v5.5-10pct.plans_all_" + car2Mode + "_unrouted.xml.gz";
 //		String outputPopulationPath = "/home/gregor/git/public-svn/matsim/scenarios/countries/de/berlin/berlin-v5.5-10pct/input/berlin-v5.5-10pct.plans_" + probability + "_" + carMode + "_to_" + car2Mode + ".xml.gz";
 
 		Scenario inputScenario = ScenarioUtils.createScenario(ConfigUtils.createConfig());
@@ -58,9 +58,10 @@ public class MoveCarAgentsToCar2StreamReading {
 		
 		StreamingPopulationReader spr = new StreamingPopulationReader(inputScenario);
 		spr.addAlgorithm(person -> {
-			if (Math.random() < probability) {
+
 				for (Plan plan: person.getPlans()) {
 					tripsToLegsAlgorithm.run(plan);
+					if (Math.random() < probability) {
 					for (PlanElement planElement: plan.getPlanElements()) {
 						if (planElement instanceof Leg) {
 							Leg leg = (Leg) planElement;
