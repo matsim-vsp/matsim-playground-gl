@@ -1,6 +1,7 @@
 package playground.gleich.analysis;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class TripsInVsOutsideArea {
 
     private final Scenario scenario;
-    private static final Logger log = Logger.getLogger(TripsInVsOutsideArea.class);
+    private static final Logger log = LogManager.getLogger(TripsInVsOutsideArea.class);
 
     public static void main (String[] args) throws MalformedURLException {
 //        String pathInclRunId = "/home/gregor/git/runs-svn/avoev/snz-gladbeck/output-snzDrt441/snzDrt441";

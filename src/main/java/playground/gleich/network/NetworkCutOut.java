@@ -1,6 +1,7 @@
 package playground.gleich.network;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.api.core.v01.network.Link;
 import org.matsim.api.core.v01.network.Network;
@@ -14,7 +15,7 @@ import org.matsim.core.scenario.ScenarioUtils;
 
 public class NetworkCutOut {
 	
-	private final static Logger LOG = Logger.getLogger(NetworkCutOut.class);
+	private final static Logger LOG = LogManager.getLogger(NetworkCutOut.class);
 	
 	public static void main(String[] args) {
 		// Check if args has an interpretable length

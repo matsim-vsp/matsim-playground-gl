@@ -16,7 +16,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
@@ -39,7 +40,7 @@ import playground.vsp.andreas.utils.pt.TransitScheduleCleaner;
 
 public class TransitLinesHeadwayBasedRemover {
 
-	private static final Logger log = Logger.getLogger(TransitLinesHeadwayBasedRemover.class);
+	private static final Logger log = LogManager.getLogger(TransitLinesHeadwayBasedRemover.class);
 	
 	public static void main(String[] args) throws MalformedURLException {
 		final String inScheduleFile = "https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/berlin/berlin-v5.5-10pct/input/berlin-v5.5-transit-schedule.xml.gz";

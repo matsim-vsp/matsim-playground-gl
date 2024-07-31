@@ -22,7 +22,8 @@ package playground.gleich.analysis.drt.operationTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.events.ActivityEndEvent;
 import org.matsim.api.core.v01.events.ActivityStartEvent;
@@ -37,7 +38,7 @@ import org.matsim.core.utils.misc.Counter;
  */
 public class DrtOperationTimeEventHandler implements ActivityStartEventHandler, ActivityEndEventHandler {
 	
-	private final static Logger log = Logger.getLogger(DrtOperationTimeEventHandler.class);
+	private final static Logger log = LogManager.getLogger(DrtOperationTimeEventHandler.class);
 	private Map<Id<Person>, Double> drtVehDriver2OperationTime = new HashMap<>();
 	private Map<Id<Person>, Double> drtVehDriver2LastStayTaskEndTime = new HashMap<>();
 	private Counter counter = new Counter("[" + this.getClass().getSimpleName() + "] handled ExperiencedTrip # ", "", 4);

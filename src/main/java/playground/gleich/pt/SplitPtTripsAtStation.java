@@ -4,7 +4,8 @@ import java.util.HashSet;
 import java.util.ListIterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Geometry;
 import org.matsim.api.core.v01.Coord;
 import org.matsim.api.core.v01.Scenario;
@@ -41,7 +42,7 @@ import playground.gleich.utilsFromOthers.jbischoff.JbUtils;
  */
 public class SplitPtTripsAtStation {
 
-	private static final Logger log = Logger.getLogger(SplitPtTripsAtStation.class);
+	private static final Logger log = LogManager.getLogger(SplitPtTripsAtStation.class);
 	private String inputPopulationPath;
 	private String studyAreaShpPath;
 	private String studyAreaShpKey;

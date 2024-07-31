@@ -18,7 +18,8 @@
  * *********************************************************************** */
 package playground.gleich.analysis.pt;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
@@ -67,7 +68,7 @@ public class CalculatePtOperatingCostsFromEvents {
     private int numVehUsed = 0;
     private double pkm = 0.0;
     private double totalCost = 0.0;
-	private final static Logger log = Logger.getLogger(CalculatePtOperatingCostsFromEvents.class);
+	private final static Logger log = LogManager.getLogger(CalculatePtOperatingCostsFromEvents.class);
 
 
 

@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Coordinate;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
@@ -31,7 +32,7 @@ import org.opengis.feature.simple.SimpleFeature;
 
 public class Links2ShapeFileRunner {
 	
-	private final static Logger log = Logger.getLogger(Links2ShapeFileRunner.class);
+	private final static Logger log = LogManager.getLogger(Links2ShapeFileRunner.class);
 
 	public static void main(String[] args) {
 		String networkFile = "/home/gregor/git/capetown/output-minibus-wo-transit/lastGoodRun/output_network.xml.gz";

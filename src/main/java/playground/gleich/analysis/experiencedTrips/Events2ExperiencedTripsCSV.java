@@ -27,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 import org.matsim.analysis.TripsAndLegsCSVWriter;
@@ -69,7 +70,7 @@ public final class Events2ExperiencedTripsCSV {
 	private final String sep2 = ",";
 	private static String pathInclRunIdAndDot = "";
 
-	private static final Logger log = Logger.getLogger(Events2ExperiencedTripsCSV.class);
+	private static final Logger log = LogManager.getLogger(Events2ExperiencedTripsCSV.class);
     
     public static void main(String[] args) {
 		pathInclRunIdAndDot = "/home/gregor/git/runs-svn/avoev/snz-vulkaneifel/output-Vu-DRT-9/Vu-DRT-9.";

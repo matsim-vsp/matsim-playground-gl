@@ -19,7 +19,8 @@
 
 package playground.gleich.analysis.pt.stop2stop;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.core.api.experimental.events.EventsManager;
 import org.matsim.core.config.ConfigUtils;
@@ -36,7 +37,7 @@ import org.matsim.vehicles.MatsimVehicleReader;
  * @author vsp-gleich
  */
 public class RunPtStop2StopOffline {
-    private static final Logger log = Logger.getLogger(RunPtStop2StopOffline.class);
+    private static final Logger log = LogManager.getLogger(RunPtStop2StopOffline.class);
 
     public static void main(String[] args) {
 //        String eventsFile = "/home/gregor/tmp/i364/i364.output_events.xml.gz";

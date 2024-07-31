@@ -21,7 +21,8 @@ package playground.gleich.analysis.drt.operationTime;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.population.Person;
 import org.matsim.core.api.experimental.events.EventsManager;
@@ -40,7 +41,7 @@ import org.matsim.core.events.EventsUtils;
  *
  */
 public class RunDrtOperationtimeCalculator {
-	private final static Logger log = Logger.getLogger(RunDrtOperationtimeCalculator.class);
+	private final static Logger log = LogManager.getLogger(RunDrtOperationtimeCalculator.class);
 	private final String eventsFile;
 
 	public RunDrtOperationtimeCalculator(String eventsFile) {

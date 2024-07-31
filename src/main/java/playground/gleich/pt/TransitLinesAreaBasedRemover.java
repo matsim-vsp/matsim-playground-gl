@@ -1,6 +1,7 @@
 package playground.gleich.pt;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class TransitLinesAreaBasedRemover {
 
-	private static final Logger log = Logger.getLogger(TransitLinesAreaBasedRemover.class);
+	private static final Logger log = LogManager.getLogger(TransitLinesAreaBasedRemover.class);
 
 	public static void main(String[] args) throws MalformedURLException {
 		final String inScheduleFile = "../../shared-svn/projects/avoev/matsim-input-files/vulkaneifel/v0/optimizedSchedule.xml.gz";

@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.contrib.minibus.PConfigGroup;
@@ -30,7 +31,7 @@ import org.matsim.pt.transitSchedule.api.TransitStopFacility;
  */
 public class RouteDesignScoringForAnalysis {
 	
-	private final static Logger log = Logger.getLogger(RouteDesignScoringForAnalysis.class);
+	private final static Logger log = LogManager.getLogger(RouteDesignScoringForAnalysis.class);
 
 	public static void main(String[] args) {
 		String networkFile = "/home/gregor/git/capetown/output-minibus-wo-transit/lastGoodRun/output_network.xml.gz";

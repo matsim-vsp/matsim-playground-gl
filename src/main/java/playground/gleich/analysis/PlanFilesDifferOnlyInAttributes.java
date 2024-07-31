@@ -19,7 +19,8 @@
 
 package playground.gleich.analysis;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.api.core.v01.population.Activity;
 import org.matsim.api.core.v01.population.Leg;
@@ -36,7 +37,7 @@ import com.google.common.base.Verify;
 
 public class PlanFilesDifferOnlyInAttributes {
 	
-	private static final Logger log = Logger.getLogger(PlanFilesDifferOnlyInAttributes.class);
+	private static final Logger log = LogManager.getLogger(PlanFilesDifferOnlyInAttributes.class);
 
 	public static void main(String[] args) {		
 		String planFile1 = "/home/gregor/git/matsim/matsim/test/output/org/matsim/integration/replanning/ReRoutingIT/testReRoutingDijkstra/reference_population.xml.gz";

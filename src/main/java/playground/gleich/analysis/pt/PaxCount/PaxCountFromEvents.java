@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.core.api.experimental.events.EventsManager;
@@ -52,7 +53,7 @@ import org.matsim.pt.transitSchedule.api.TransitStopFacility;
  */
 public class PaxCountFromEvents {
 	
-	private final static Logger log = Logger.getLogger(PaxCountFromEvents.class);
+	private final static Logger log = LogManager.getLogger(PaxCountFromEvents.class);
 	
 	private final String eventsFile;
 	private final Scenario scenario;
