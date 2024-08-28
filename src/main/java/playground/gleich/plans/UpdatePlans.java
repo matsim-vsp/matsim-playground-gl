@@ -43,7 +43,7 @@ public class UpdatePlans {
 
 
 //        Config config = this.utils.loadConfig(IOUtils.extendUrl(ExamplesUtils.getTestScenarioURL("pt-tutorial"), "0.config.xml"));
-        config.controler().setLastIteration(1);
+        config.controller().setLastIteration(1);
         config.plans().setHandlingOfPlansWithoutRoutingMode(PlansConfigGroup.HandlingOfPlansWithoutRoutingMode.useMainModeIdentifier);
 
 

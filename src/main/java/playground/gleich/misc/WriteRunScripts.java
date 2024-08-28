@@ -1,7 +1,6 @@
 package playground.gleich.misc;
 
 import org.matsim.core.utils.io.IOUtils;
-import org.matsim.core.utils.io.UncheckedIOException;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -129,7 +128,7 @@ public class WriteRunScripts {
                 writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                throw new UncheckedIOException(e);
+                throw new RuntimeException(e);
             }
         }
     }

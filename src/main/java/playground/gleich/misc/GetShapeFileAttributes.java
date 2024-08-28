@@ -1,7 +1,7 @@
 package playground.gleich.misc;
 
 import org.matsim.core.utils.gis.ShapeFileReader;
-import org.opengis.feature.simple.SimpleFeature;
+import org.geotools.api.feature.simple.SimpleFeature;
 
 import java.util.Collection;
 

@@ -43,11 +43,16 @@ import java.util.*;
 public class ModifyIncomeAndPersonScoreAttributesStreamReading {
 
 	public static void main(String[] args) {
-		double mean = -0.017;
-		double sigma = 3;
+//		double mean = 0.397;
+//		double sigma = 3.0;
+//		String mode = TransportMode.pt;
+		double mean = -0.534;
+		double sigma = 3.0;
 		String mode = TransportMode.car;
-		String inputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.0/input/berlin-v6.0-10pct.plans.xml.gz";
-		String outputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.0/input/berlin-v6.0-10pct.plans_person_asc_" + mode + "_mean_" + mean + "_sigma_" + sigma + ".xml.gz";
+		String inputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.3/input/berlin-v6.3-10pct.plans.xml.gz";
+//		String outputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.3/input/berlin-v6.3-10pct.plans_person_asc_" + mode + "_mean_" + mean + "_sigma_" + sigma + "_uniform.xml.gz";
+		String outputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.3/input/berlin-v6.3-10pct.plans_income_equal.xml.gz";
+
 
 		Scenario inputScenario = ScenarioUtils.createScenario(ConfigUtils.createConfig());
 
@@ -59,17 +64,21 @@ public class ModifyIncomeAndPersonScoreAttributesStreamReading {
 		
 		StreamingPopulationReader spr = new StreamingPopulationReader(inputScenario);
 		spr.addAlgorithm(person -> {
-//			Double oldIncome = PersonUtils.getIncome(person);
-//			if (oldIncome != null) {
-//				double newIncome = 1;
-//				PersonUtils.setIncome(person, newIncome);
-//			}
-			Map<String, String> modeConstants = PersonUtils.getModeConstants(person);
-			if (modeConstants == null) {
-				modeConstants = new HashMap<>();
+			Double oldIncome = PersonUtils.getIncome(person);
+			if (oldIncome != null) {
+				double newIncome = 1;
+				PersonUtils.setIncome(person, newIncome);
 			}
-			modeConstants.put(mode, Double.toString(RandomFromDistribution.nextLogNormalFromMeanAndSigma(splittableRandom, mean, sigma)));
-			PersonUtils.setModeConstants(person, modeConstants);
+//			Map<String, String> modeConstants = PersonUtils.getModeConstants(person);
+//			if (modeConstants == null) {
+//				modeConstants = new HashMap<>();
+//			}
+//			double modeConstant = RandomFromDistribution.nextLogNormalFromMeanAndSigma(splittableRandom, mean, sigma);
+			double modeConstant = (splittableRandom.nextDouble() - 0.5) * 2 * sigma + mean; // linear
+
+//			modeConstants.put(mode, Double.toString(modeConstant));
+//			PersonUtils.setModeConstants(person, modeConstants);
+
 			popWriter.writePerson(person);
 		}
 		);

@@ -31,7 +31,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
-import org.matsim.analysis.TripsAndLegsCSVWriter;
+import org.matsim.analysis.TripsAndLegsWriter;
 import org.matsim.api.core.v01.Coord;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
@@ -130,15 +130,15 @@ public final class Events2ExperiencedTripsCSV {
     public void runAnalysisAndWriteResult(String outputExperiencedTripsFile, String outputExperiencedLegsFile,
 										  AnalysisMainModeIdentifier mainModeIdentifier,
 										  String shpFile) {
-    	TripsAndLegsCSVWriter.CustomTripsWriterExtension customTripsWriterExtension = new ExperiencedTripsExtension(shpFile);
-		TripsAndLegsCSVWriter.CustomLegsWriterExtension customLegsWriterExtension = new ExperiencedLegsExtension();
-		TripsAndLegsCSVWriter.CustomTimeWriter timeWriter = new DefaultTimeWriter();
-		new TripsAndLegsCSVWriter(scenario, customTripsWriterExtension, customLegsWriterExtension, mainModeIdentifier, timeWriter).
+    	TripsAndLegsWriter.CustomTripsWriterExtension customTripsWriterExtension = new ExperiencedTripsExtension(shpFile);
+		TripsAndLegsWriter.CustomLegsWriterExtension customLegsWriterExtension = new ExperiencedLegsExtension();
+		TripsAndLegsWriter.CustomTimeWriter timeWriter = new DefaultTimeWriter();
+		new TripsAndLegsWriter(scenario, customTripsWriterExtension, customLegsWriterExtension, mainModeIdentifier, timeWriter).
 				write(experiencedPlansService.getExperiencedPlans(), outputExperiencedTripsFile, outputExperiencedLegsFile);
     	 log.info("Done writing " + outputExperiencedTripsFile + " and " + outputExperiencedLegsFile);
     }
     
-    private class ExperiencedTripsExtension implements TripsAndLegsCSVWriter.CustomTripsWriterExtension {
+    private class ExperiencedTripsExtension implements TripsAndLegsWriter.CustomTripsWriterExtension {
 
 		List<Geometry> geometries;
 
@@ -198,7 +198,7 @@ public final class Events2ExperiencedTripsCSV {
 		return this.scenario.getNetwork().getLinks().get(linkId).getToNode().getCoord();
 	}
 
-	static class ExperiencedLegsExtension implements TripsAndLegsCSVWriter.CustomLegsWriterExtension {
+	static class ExperiencedLegsExtension implements TripsAndLegsWriter.CustomLegsWriterExtension {
 		@Override
 		public String[] getAdditionalLegHeader() {
 			return new String[]{"isIntermodalDrtPt", "intermodalMode"};
@@ -232,7 +232,7 @@ public final class Events2ExperiencedTripsCSV {
 		return minimumDistance.isPresent() ? minimumDistance.get().toString() : "NA";
 	}
 
-	static class DefaultTimeWriter implements TripsAndLegsCSVWriter.CustomTimeWriter {
+	static class DefaultTimeWriter implements TripsAndLegsWriter.CustomTimeWriter {
 		@Override
 		public String writeTime(double time) {
 			return Time.writeTime(time);

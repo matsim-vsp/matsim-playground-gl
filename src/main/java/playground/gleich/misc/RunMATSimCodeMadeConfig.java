@@ -4,7 +4,7 @@ import ch.sbb.matsim.routing.pt.raptor.SwissRailRaptorModule;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
-import org.matsim.core.config.groups.PlanCalcScoreConfigGroup;
+import org.matsim.core.config.groups.ScoringConfigGroup;
 import org.matsim.core.controler.Controler;
 import org.matsim.core.controler.OutputDirectoryHierarchy;
 import org.matsim.core.scenario.ScenarioUtils;
@@ -24,12 +24,12 @@ public class RunMATSimCodeMadeConfig {
 
 		config.plans().setInputFile("/home/gregor/tmp/Vu-DRT-25/testplans.xml");
 
-		config.planCalcScore().addActivityParams(new PlanCalcScoreConfigGroup.ActivityParams("home").setTypicalDuration(8*3600));
-		config.planCalcScore().addActivityParams(new PlanCalcScoreConfigGroup.ActivityParams("work").setTypicalDuration(5*3600));
+		config.scoring().addActivityParams(new ScoringConfigGroup.ActivityParams("home").setTypicalDuration(8*3600));
+		config.scoring().addActivityParams(new ScoringConfigGroup.ActivityParams("work").setTypicalDuration(5*3600));
 
-		config.controler().setLastIteration(0);
-		config.controler().setOutputDirectory("nowhere");
-		config.controler().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.deleteDirectoryIfExists);
+		config.controller().setLastIteration(0);
+		config.controller().setOutputDirectory("nowhere");
+		config.controller().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.deleteDirectoryIfExists);
 
 		Scenario scenario = ScenarioUtils.loadScenario(config);
 		Controler controler = new Controler(scenario);
