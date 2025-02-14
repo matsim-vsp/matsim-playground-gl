@@ -43,16 +43,16 @@ import java.util.*;
 public class ModifyIncomeAndPersonScoreAttributesStreamReading {
 
 	public static void main(String[] args) {
-//		double mean = 0.397;
-//		double sigma = 3.0;
-//		String mode = TransportMode.pt;
-		double mean = -0.534;
+//		boolean makeIncomeEqual = true;
+		boolean makeIncomeEqual = false;
+		boolean personAsc = true;
+		double mean = 0.0;
 		double sigma = 3.0;
-		String mode = TransportMode.car;
+		SortedSet<String> modes = new TreeSet<>();
+		modes.addAll(List.of(TransportMode.car, TransportMode.pt, TransportMode.bike, TransportMode.ride));
+//		modes.addAll(List.of(TransportMode.car, TransportMode.pt, TransportMode.bike, TransportMode.ride, TransportMode.walk));
 		String inputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.3/input/berlin-v6.3-10pct.plans.xml.gz";
-//		String outputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.3/input/berlin-v6.3-10pct.plans_person_asc_" + mode + "_mean_" + mean + "_sigma_" + sigma + "_uniform.xml.gz";
-		String outputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.3/input/berlin-v6.3-10pct.plans_income_equal.xml.gz";
-
+		String outputPopulationPath = "../public-svn/matsim/scenarios/countries/de/berlin/berlin-v6.3/input/berlin-v6.3-10pct.plans" + (makeIncomeEqual ? "_income_equal" : "") + (personAsc ? "_person_asc_" + String.join("-", modes) + "_mean_" + mean + "_sigma_" + sigma + "_uniform" : "") +".xml.gz";
 
 		Scenario inputScenario = ScenarioUtils.createScenario(ConfigUtils.createConfig());
 
@@ -64,20 +64,26 @@ public class ModifyIncomeAndPersonScoreAttributesStreamReading {
 		
 		StreamingPopulationReader spr = new StreamingPopulationReader(inputScenario);
 		spr.addAlgorithm(person -> {
-			Double oldIncome = PersonUtils.getIncome(person);
-			if (oldIncome != null) {
-				double newIncome = 1;
-				PersonUtils.setIncome(person, newIncome);
+			if (makeIncomeEqual) {
+				Double oldIncome = PersonUtils.getIncome(person);
+				if (oldIncome != null) {
+					double newIncome = 1;
+					PersonUtils.setIncome(person, newIncome);
+				}
 			}
-//			Map<String, String> modeConstants = PersonUtils.getModeConstants(person);
-//			if (modeConstants == null) {
-//				modeConstants = new HashMap<>();
-//			}
-//			double modeConstant = RandomFromDistribution.nextLogNormalFromMeanAndSigma(splittableRandom, mean, sigma);
-			double modeConstant = (splittableRandom.nextDouble() - 0.5) * 2 * sigma + mean; // linear
+			if (personAsc) {
+				Map<String, String> modeConstants = PersonUtils.getModeConstants(person);
+				if (modeConstants == null) {
+					modeConstants = new HashMap<>();
+				}
+				for (String mode: modes) {
+					//				double modeConstant = RandomFromDistribution.nextLogNormalFromMeanAndSigma(splittableRandom, mean, sigma);
+					double modeConstant = (splittableRandom.nextDouble() - 0.5) * 2 * sigma + mean; // linear
 
-//			modeConstants.put(mode, Double.toString(modeConstant));
-//			PersonUtils.setModeConstants(person, modeConstants);
+					modeConstants.put(mode, Double.toString(modeConstant));
+					PersonUtils.setModeConstants(person, modeConstants);
+				}
+			}
 
 			popWriter.writePerson(person);
 		}

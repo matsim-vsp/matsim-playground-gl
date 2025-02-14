@@ -167,7 +167,7 @@ public class PtStop2StopAnalysis implements TransitDriverStartsEventHandler, Veh
 
     @Override
     public void reset(int iteration) {
-        if(transitVehicle2temporaryVehicleData.size() > 0) {
+        if(!transitVehicle2temporaryVehicleData.isEmpty()) {
             log.warn(transitVehicle2temporaryVehicleData.size() + " transit vehicles did not finish service in the last iteration.");
         }
         transitVehicle2temporaryVehicleData.clear();
@@ -350,7 +350,10 @@ public class PtStop2StopAnalysis implements TransitDriverStartsEventHandler, Veh
                 thenComparing(stop2StopEntryByDepartureComparator).
                 thenComparing(stop2StopEntryByStopSequenceComparator));
         try (CSVPrinter printer = new CSVPrinter(IOUtils.getBufferedWriter(fileName),
-                CSVFormat.DEFAULT.withDelimiter(columnSeparator.charAt(0)).withHeader(HEADER))
+                CSVFormat.Builder.create()
+                        .setDelimiter(columnSeparator)
+                        .setHeader(HEADER)
+                        .build())
         ) {
             for (Stop2StopEntry entry : stop2StopEntriesForEachDeparture) {
                 printer.print(entry.transitLineId);
